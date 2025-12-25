@@ -32,7 +32,7 @@ export function useTelegram() {
       // 1. Проверяем нативный Telegram объект (для мобильных/десктоп приложений)
       if (window.Telegram?.WebApp) {
         console.log('✅ Native Telegram WebApp detected');
-        const webApp = window.Telegram.WebApp;
+        const webApp = window.Telegram.WebApp as any;
 
         // Расширяем на весь экран и говорим что готовы
         webApp.expand();

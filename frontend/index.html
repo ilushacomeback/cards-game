@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -8,6 +8,31 @@
   </head>
   <body>
     <div id="root"></div>
+    <div id="data"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      // Проверяем объект Telegram
+      console.log('Telegram object:', window.Telegram);
+      console.log('WebApp object:', window.Telegram?.WebApp);
+
+      if (window.Telegram && window.Telegram.WebApp) {
+        // Инициализируем
+        const tg = window.Telegram.WebApp;
+        tg.expand(); // Разворачиваем на весь экран
+        tg.ready(); // Говорим, что приложение готово
+
+        // Показываем данные
+        document.getElementById('data').innerHTML = `
+                <p>User ID: ${tg.initDataUnsafe?.user?.id || 'N/A'}</p>
+                <p>Platform: ${tg.platform}</p>
+                <p>Version: ${tg.version}</p>
+            `;
+
+        console.log('Init Data:', tg.initDataUnsafe);
+      } else {
+        document.getElementById('data').innerHTML =
+          '<p style="color:red">Telegram WebApp not available. Open via Telegram bot.</p>';
+      }
+    </script>
   </body>
 </html>

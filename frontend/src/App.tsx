@@ -9,7 +9,7 @@ function App() {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      console.log('telegramm, window.Telegram?.WebApp', window.Telegram )
+      console.log('telegramm, window.Telegram?.WebApp', window.Telegram);
       if (window.Telegram?.WebApp) {
         clearInterval(interval);
         const tg = window.Telegram.WebApp;
@@ -18,6 +18,23 @@ function App() {
       }
     }, 3000);
   }, [count]);
+
+  useEffect(() => {
+    console.log('Full window object:', window);
+    console.log('Telegram object:', window.Telegram);
+    alert(`Telegram object: ${window.Telegram}`);
+    console.log('Location:', window.location.href);
+    alert(`Location: ${window.location.href}`);
+    console.log('Referrer:', document.referrer);
+    alert(`Referrer: ${document.referrer}`);
+    console.log('User agent:', navigator.userAgent);
+    alert(`User agent: ${navigator.userAgent}`);
+
+    // Проверяем, находимся ли мы в Telegram
+    const isTelegram = /Telegram|WebApp/i.test(navigator.userAgent);
+    alert(`Is Telegram? ${isTelegram}`);
+    console.log('Is Telegram?', isTelegram);
+  }, []);
 
   return (
     <>

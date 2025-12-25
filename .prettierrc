@@ -1,0 +1,24 @@
+{
+  "semi": true,
+  "singleQuote": true,
+  "trailingComma": "all",
+  "printWidth": 100,
+  "overrides": [
+    {
+      "files": "*.conf",
+      "options": {
+        "parser": "nginx"
+      }
+    },
+    {
+      "files": "*.sh",
+      "options": {
+        "parser": "shell"
+      }
+    },
+    {
+      "files": ["*.ts", "*.js", "*.json", "*.css", "*.html"],
+      "options": {}
+    }
+  ]
+}

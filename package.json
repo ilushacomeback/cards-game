@@ -1,0 +1,20 @@
+{
+  "name": "cards-game-root",
+  "version": "1.0.0",
+  "private": true,
+  "workspaces": [
+    "frontend",
+    "backend"
+  ],
+  "scripts": {
+    "dev": "concurrently \"yarn dev:backend\" \"yarn dev:frontend\"",
+    "dev:backend": "cd backend && yarn dev",
+    "dev:frontend": "cd frontend && vite",
+    "build": "concurrently \"yarn build:backend\" \"yarn build:frontend\"",
+    "build:backend": "cd backend && yarn build",
+    "build:frontend": "cd frontend && tsc && vite build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

@@ -1,4 +1,3 @@
-// hooks/useTelegram.ts
 import { useEffect, useState } from 'react';
 
 interface TelegramWebApp {
@@ -32,6 +31,7 @@ export function useTelegram() {
       // 1. Проверяем нативный Telegram объект (для мобильных/десктоп приложений)
       if (window.Telegram?.WebApp) {
         console.log('✅ Native Telegram WebApp detected');
+        alert('Native Telegram WebApp detected');
         const webApp = window.Telegram.WebApp as any;
 
         // Расширяем на весь экран и говорим что готовы
@@ -46,6 +46,7 @@ export function useTelegram() {
       // 2. Проверяем данные в hash (для Telegram Web)
       if (window.location.hash.includes('tgWebAppData')) {
         console.log('🌐 Telegram Web version detected');
+        alert('Telegram Web version detected');
         const webApp = createTelegramMockFromHash();
         if (webApp) {
           setTg(webApp);

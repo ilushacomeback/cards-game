@@ -11,25 +11,31 @@ function App() {
     if (window.Telegram?.WebApp) {
       const tg = window.Telegram.WebApp;
       tg.ready();
-      setTg(JSON.stringify(tg));
+      setTg(decodeURIComponent(tg.initData));
+      const fn = async (initData: string) => {
+        console.log('init data', JSON.stringify(initData));
+        try {
+          const res = await fetch('/api/login', {
+            method: 'POST',
+            body: JSON.stringify({ initData }),
+            credentials: 'include',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
+          const payload = await res.json();
+
+          if (!res.ok) {
+            throw new Error(payload.message ?? 'Request failed');
+          }
+          console.log('success', payload);
+        } catch (e) {
+          console.error('error', e);
+        }
+      };
+      fn(tg.initData);
     }
   }, [count]);
-
-  useEffect(() => {
-    console.log('Telegram object:', window.Telegram);
-    alert(`Telegram object: ${window.Telegram}`);
-    console.log('Location:', window.location.href);
-    alert(`Location: ${window.location.href}`);
-    console.log('Referrer:', document.referrer);
-    alert(`Referrer: ${document.referrer}`);
-    console.log('User agent:', navigator.userAgent);
-    alert(`User agent: ${navigator.userAgent}`);
-
-    // Проверяем, находимся ли мы в Telegram
-    const isTelegram = /Telegram|WebApp/i.test(navigator.userAgent);
-    alert(`Is Telegram? ${isTelegram}`);
-    console.log('Is Telegram?', isTelegram);
-  }, []);
 
   return (
     <>
@@ -41,14 +47,15 @@ function App() {
           <img src={reactLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>Vite + Reacыыt</h1>
+      <h1>Vite + React</h1>
+      <h2>Малыхин легенда</h2>
       <div className="card">
         <button onClick={() => setCount((count) => count + 1)}>count is {count}</button>
         <p>
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
-      <div>{tg}</div>
+      {JSON.stringify(tg)}
       <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
     </>
   );

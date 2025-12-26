@@ -8,12 +8,12 @@ export default defineConfig({
     port: 5173, // Порт по умолчанию для Vite
     proxy: {
       '/api': {
-        target: 'http://localhost:3000', // Твой Fastify бэкенд
+        target: 'http://localhost:3000/api', // Твой Fastify бэкенд
         changeOrigin: true,
         rewrite: (path) => path.replace(/^\/api/, ''),
       },
     },
-    allowedHosts: true
+    allowedHosts: true,
   },
   build: {
     outDir: './dist',

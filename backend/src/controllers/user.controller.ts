@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
-import { User } from '../models';
+import { User } from '../models/index.js';
 
 class UserContoller {
   async createUser(
@@ -9,9 +9,9 @@ class UserContoller {
     try {
       // const player = this.
       const player = await User.create(req.body);
-      reply.code(201).send(player);
+      return reply.code(201).send(player);
     } catch (error: any) {
-      reply.code(400).send({ error: error.message });
+      return reply.code(400).send({ error: error.message });
     }
   }
 
@@ -24,10 +24,7 @@ class UserContoller {
     }
   }
 
-  async getUserById(
-    req: FastifyRequest<{ Params: { telegramId: string } }>,
-    reply: FastifyReply,
-  ) {
+  async getUserById(req: FastifyRequest<{ Params: { telegramId: string } }>, reply: FastifyReply) {
     try {
       const player = await User.findById({ telegramId: Number(req.params.telegramId) });
 
@@ -42,4 +39,4 @@ class UserContoller {
   }
 }
 
-export default new UserContoller();
+export const userController = new UserContoller();

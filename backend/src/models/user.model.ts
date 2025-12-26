@@ -1,4 +1,4 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import { Schema, Document, model } from 'mongoose';
 
 export interface IUser extends Document {
   telegramId: number;
@@ -21,10 +21,7 @@ const UserSchema: Schema = new Schema(
       unique: true,
     },
     username: String,
-    firstName: {
-      type: String,
-      required: true,
-    },
+    firstName: String,
     score: {
       type: Number,
       default: 0,
@@ -59,4 +56,4 @@ const UserSchema: Schema = new Schema(
   },
 );
 
-export const User = mongoose.model<IUser>('User', UserSchema);
+export const User = model<IUser>('User', UserSchema);

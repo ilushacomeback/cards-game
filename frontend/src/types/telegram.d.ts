@@ -1,4 +1,4 @@
-import type { TelegramInitDataUnsafe } from '../telegram';
+import type { InitData } from '@telegram-apps/init-data-node';
 
 export {};
 
@@ -7,7 +7,7 @@ declare global {
     Telegram?: {
       WebApp: {
         initData: string;
-        initDataUnsafe: TelegramInitDataUnsafe;
+        initDataUnsafe: InitData;
         ready: () => void;
         close: () => void;
         expand: () => void;

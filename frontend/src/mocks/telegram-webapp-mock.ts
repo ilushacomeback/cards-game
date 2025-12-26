@@ -1,12 +1,11 @@
-// src/mocks/telegram-webapp-mock.ts
-import type { TelegramInitDataUnsafe } from '../telegram';
+
 
 const MOCK_USER_ID = 123456789;
 const MOCK_CHAT_ID = 987654321;
 
 export const mockTelegram = () => {
   if (!window.Telegram) {
-    const initDataUnsafe: TelegramInitDataUnsafe = {
+    const initDataUnsafe = {
       user: {
         id: MOCK_USER_ID,
         first_name: 'Dev',
@@ -15,9 +14,11 @@ export const mockTelegram = () => {
       chat: {
         id: MOCK_CHAT_ID,
         type: 'private',
+        title: 'chatik',
       },
-      auth_date: Math.floor(Date.now() / 1000),
+      auth_date: new Date(),
       hash: 'mock_hash',
+      signature: 'sasasaa'
     };
 
     const initData = JSON.stringify(initDataUnsafe); // простая строка для теста
